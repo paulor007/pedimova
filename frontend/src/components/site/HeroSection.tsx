@@ -1,7 +1,8 @@
 import heroBackground from "../../assets/hero-bg.webp";
 import { ButtonLink } from "../ui/ButtonLink";
 import { buttonClasses } from "../ui/styles";
-import { HeroSystemPreview } from "./HeroSystemPreview";
+import { HeroPreview } from "./HeroPreview";
+import { HeroHighlights } from "./HeroHighlights";
 
 export function HeroSection() {
   return (
@@ -27,7 +28,7 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <div className="page-container relative z-10 grid min-h-[calc(100dvh-4rem)] items-center gap-14 py-20 xl:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)] xl:content-center xl:items-start xl:gap-16">
-        {/* Apresentação do produto */}
+        {/* Product pitch */}
         <div className="max-w-[750px]">
           <h1
             id="hero-heading"
@@ -58,11 +59,13 @@ export function HeroSection() {
               Como funciona
             </a>
           </div>
+
+          <HeroHighlights />
         </div>
 
-        {/* Prévia visual da operação */}
+        {/* Illustrative preview of the operation */}
         <div className="w-full min-w-0 max-w-[650px] justify-self-end">
-          <HeroSystemPreview />
+          <HeroPreview />
         </div>
       </div>
     </section>

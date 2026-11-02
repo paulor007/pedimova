@@ -94,3 +94,8 @@ export const DOMAINS: readonly Domain[] = [
     publishes: "ProductUpdated",
   },
 ];
+
+/** The same areas, looked up by id. */
+export const DOMAIN_BY_ID = Object.fromEntries(
+  DOMAINS.map((domain) => [domain.id, domain]),
+) as Record<DomainId, Domain>;
