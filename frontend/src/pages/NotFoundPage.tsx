@@ -1,9 +1,10 @@
 import { TextLink } from "../components/ui/TextLink";
+import { pageTitle } from "../config/brand";
 
 export function NotFoundPage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24">
-      <title>Página não encontrada — OrderFlow</title>
+      <title>{pageTitle("Página não encontrada")}</title>
 
       <p className="font-mono text-xs tracking-overline text-accent uppercase">
         Erro 404

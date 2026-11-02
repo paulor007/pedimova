@@ -1,6 +1,7 @@
 import { Pause, Play } from "lucide-react";
 import { useState, type CSSProperties } from "react";
 import { DOMAINS, type DomainId } from "./domains";
+import { BRAND } from "../../config/brand";
 
 /*
  * Diagram coordinates, in a 1000 x 560 viewBox.
@@ -62,7 +63,7 @@ export function ArchitectureDiagram() {
       <svg
         viewBox="0 0 1000 560"
         role="img"
-        aria-label="Como o OrderFlow funciona: sua equipe usa o Painel OrderFlow para trabalhar em cinco áreas (Cadastros, Estoque, Pedidos, Pagamentos e Notificações), e as áreas se mantêm atualizadas entre si pela central de atualizações."
+        aria-label={`Como o ${BRAND.name} funciona: sua equipe usa o Painel ${BRAND.name} para trabalhar em cinco áreas (Cadastros, Estoque, Pedidos, Pagamentos e Notificações), e as áreas se mantêm atualizadas entre si pela central de atualizações.`}
         className="hidden w-full lg:block"
       >
         <defs>
@@ -144,7 +145,7 @@ export function ArchitectureDiagram() {
           fontWeight="600"
           className="fill-fg font-sans"
         >
-          Painel OrderFlow
+          Painel {BRAND.name}
         </text>
 
         <text
@@ -268,7 +269,7 @@ export function ArchitectureDiagram() {
       {/* Phones and tablets: the same structure as stacked cards */}
       <div className="space-y-3 lg:hidden">
         <div className="rounded-control border border-line-strong bg-surface p-4">
-          <p className="font-semibold text-fg">Painel OrderFlow</p>
+          <p className="font-semibold text-fg">Painel {BRAND.name}</p>
           <p className="font-mono text-xs text-fg-muted">
             sua equipe · acesso por perfil
           </p>

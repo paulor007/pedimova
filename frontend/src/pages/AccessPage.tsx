@@ -1,7 +1,9 @@
+import { pageTitle } from "../config/brand";
+
 export function AccessPage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24">
-      <title>Acesso à demonstração — OrderFlow</title>
+      <title>{pageTitle("Acesso à demonstração")}</title>
 
       <p className="font-mono text-xs tracking-overline text-accent uppercase">
         Demonstração

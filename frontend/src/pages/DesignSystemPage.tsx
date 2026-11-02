@@ -4,6 +4,7 @@ import { Card } from "../components/ui/Card";
 import { StatusBadge, type StatusTone } from "../components/ui/StatusBadge";
 import { TextLink } from "../components/ui/TextLink";
 import { ExternalLink } from "../components/ui/ExternalLink";
+import { BRAND, pageTitle } from "../config/brand";
 
 const colorTokens = [
   { name: "canvas", className: "bg-canvas", use: "Fundo da página" },
@@ -230,7 +231,7 @@ function ComponentsSection() {
         <h3 className="text-lg font-semibold">Links</h3>
         <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <TextLink to="#tipografia">Voltar para Tipografia</TextLink>
-          <ExternalLink href="https://github.com/paulor007/orderflow">
+          <ExternalLink href="https://github.com/paulor007/pedimova">
             Código no GitHub
           </ExternalLink>
         </div>
@@ -318,11 +319,11 @@ function InteractionSection() {
 export function DesignSystemPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8">
-      <title>Design system — OrderFlow</title>
+      <title>{pageTitle("Design system")}</title>
 
       <header className="border-b border-line pb-6">
         <p className="font-mono text-xs tracking-overline text-accent uppercase">
-          OrderFlow
+          {BRAND.name}
         </p>
 
         <h1 className="mt-2 text-3xl font-bold">Design system</h1>

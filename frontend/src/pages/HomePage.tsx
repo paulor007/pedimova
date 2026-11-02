@@ -4,11 +4,12 @@ import { DomainsSection } from "../components/site/DomainsSection";
 import { HeroSection } from "../components/site/HeroSection";
 import { ContingenciesSection } from "../components/site/ContingenciesSection";
 import { OperationOverviewSection } from "../components/site/OperationOverviewSection";
+import { pageTitle } from "../config/brand";
 
 export function HomePage() {
   return (
     <>
-      <title>OrderFlow — Gestão de pedidos e operações</title>
+      <title>{pageTitle()}</title>
 
       <HeroSection />
 

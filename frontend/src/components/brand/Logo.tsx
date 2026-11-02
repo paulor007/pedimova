@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import { BRAND } from "../../config/brand";
 
 export function LogoMark(props: ComponentProps<"svg">) {
   return (
@@ -28,7 +29,8 @@ export function Logo() {
     <span className="inline-flex items-center gap-2">
       <LogoMark className="size-7 text-accent" />
       <span className="text-lg font-bold tracking-tight text-fg">
-        Order<span className="text-accent">Flow</span>
+        {BRAND.wordmark.lead}
+        <span className="text-accent">{BRAND.wordmark.accent}</span>
       </span>
     </span>
   );

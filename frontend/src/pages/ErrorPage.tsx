@@ -1,6 +1,7 @@
 import { isRouteErrorResponse, useRouteError } from "react-router";
 import { Button } from "../components/ui/Button";
 import { ButtonLink } from "../components/ui/ButtonLink";
+import { pageTitle } from "../config/brand";
 
 export function ErrorPage() {
   const error = useRouteError();
@@ -8,7 +9,7 @@ export function ErrorPage() {
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-24 sm:px-8">
-      <title>Erro inesperado — OrderFlow</title>
+      <title>{pageTitle("Erro inesperado")}</title>
 
       <p className="font-mono text-xs tracking-overline text-danger uppercase">
         {status ? `Erro ${status}` : "Erro inesperado"}

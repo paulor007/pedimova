@@ -7,7 +7,8 @@
  * Names describe purpose (canvas, accent, danger), never the color itself.
  */
 @theme {
-  /* Remove Tailwind's default palette: only OrderFlow tokens remain. */
+  /* Remove Tailwind's default palette: only the design tokens below remain. */
+
   --color-*: initial;
 
   /* Surfaces, from the page background to raised elements */

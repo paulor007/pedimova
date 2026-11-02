@@ -1,6 +1,7 @@
 import { Link, Outlet, ScrollRestoration, useMatch } from "react-router";
 import { Logo } from "../components/brand/Logo";
 import { ButtonLink } from "../components/ui/ButtonLink";
+import { BRAND } from "../config/brand";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -20,7 +21,7 @@ export function PublicLayout() {
         <div className="page-container flex h-16 items-center justify-between gap-4">
           <Link
             to="/"
-            aria-label="OrderFlow, página inicial"
+            aria-label={`${BRAND.name}, página inicial`}
             className="rounded-control"
           >
             <Logo />
@@ -49,7 +50,9 @@ export function PublicLayout() {
             </p>
           </div>
 
-          <p>© {CURRENT_YEAR} OrderFlow</p>
+          <p>
+            © {CURRENT_YEAR} {BRAND.name}
+          </p>
         </div>
       </footer>
 
