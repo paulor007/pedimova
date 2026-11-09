@@ -67,7 +67,7 @@ export function PublicLayout() {
       </main>
 
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 text-sm text-fg-muted sm:flex-row sm:items-end sm:justify-between sm:px-8">
+        <div className="page-container flex flex-col gap-6 py-8 text-sm text-fg-muted sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Logo />
             <p className="mt-2">
