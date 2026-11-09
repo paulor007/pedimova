@@ -1,5 +1,7 @@
 import { Link, Outlet, ScrollRestoration, useMatch } from "react-router";
 import { Logo } from "../components/brand/Logo";
+import { HeaderNav } from "../components/site/HeaderNav";
+import { MobileMenu } from "../components/site/MobileMenu";
 import { ButtonLink } from "../components/ui/ButtonLink";
 import { BRAND } from "../config/brand";
 
@@ -7,6 +9,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 export function PublicLayout() {
   const isAccessPage = useMatch("/entrar") !== null;
+  const isHomePage = useMatch("/") !== null;
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -18,21 +21,43 @@ export function PublicLayout() {
       </a>
 
       <header className="sticky top-0 z-10 border-b border-line bg-canvas">
-        <div className="page-container flex h-16 items-center justify-between gap-4">
+        <div className="page-container flex h-16 items-center justify-between gap-2 sm:gap-4">
           <Link
             to="/"
             aria-label={`${BRAND.name}, página inicial`}
-            className="rounded-control"
+            className="inline-flex min-h-11 shrink-0 items-center rounded-control"
           >
             <Logo />
           </Link>
 
           {isAccessPage ? (
-            <ButtonLink to="/" variant="secondary">
+            <ButtonLink
+              to="/"
+              variant="secondary"
+              className="shrink-0 whitespace-nowrap"
+            >
               Voltar ao início
             </ButtonLink>
+          ) : isHomePage ? (
+            <div className="flex items-center gap-3">
+              <HeaderNav />
+
+              <div className="hidden sm:block">
+                <ButtonLink to="/entrar" className="shrink-0 whitespace-nowrap">
+                  Acessar Plataforma
+                </ButtonLink>
+              </div>
+
+              <MobileMenu />
+            </div>
           ) : (
-            <ButtonLink to="/entrar">Acessar Plataforma</ButtonLink>
+            <ButtonLink
+              to="/"
+              variant="secondary"
+              className="hidden shrink-0 whitespace-nowrap sm:inline-flex"
+            >
+              Voltar ao início
+            </ButtonLink>
           )}
         </div>
       </header>
