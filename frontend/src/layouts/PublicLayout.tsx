@@ -51,13 +51,15 @@ export function PublicLayout() {
               <MobileMenu />
             </div>
           ) : (
-            <ButtonLink
-              to="/"
-              variant="secondary"
-              className="hidden shrink-0 whitespace-nowrap sm:inline-flex"
-            >
-              Voltar ao início
-            </ButtonLink>
+            <div className="hidden sm:block">
+              <ButtonLink
+                to="/"
+                variant="secondary"
+                className="shrink-0 whitespace-nowrap"
+              >
+                Voltar ao início
+              </ButtonLink>
+            </div>
           )}
         </div>
       </header>
