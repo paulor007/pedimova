@@ -1,10 +1,11 @@
 import { ButtonLink } from "../ui/ButtonLink";
+import { ScrollReveal } from "./ScrollReveal";
 
 export function FinalCallSection() {
   return (
     <section aria-labelledby="chamada-final-titulo" className="py-24 md:py-32">
       <div className="page-container">
-        <div className="relative isolate overflow-hidden rounded-card border border-accent/30 bg-surface px-6 py-14 text-center shadow-glow sm:px-10 md:py-20">
+        <ScrollReveal className="relative isolate overflow-hidden rounded-card border border-accent/30 bg-surface px-6 py-14 text-center shadow-glow sm:px-10 md:py-20">
           {/* Decorative grid and accent glow */}
           <div
             aria-hidden="true"
@@ -51,7 +52,7 @@ export function FinalCallSection() {
               Acessar Plataforma
             </ButtonLink>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

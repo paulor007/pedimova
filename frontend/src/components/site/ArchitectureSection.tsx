@@ -1,4 +1,5 @@
 import { ArchitectureDiagram } from "./ArchitectureDiagram";
+import { ScrollReveal } from "./ScrollReveal";
 import { SectionMarker } from "./SectionMarker";
 import { SectionTitle } from "./SectionTitle";
 
@@ -22,7 +23,7 @@ export function ArchitectureSection() {
       <div className="page-container">
         <SectionMarker sectionId="como-funciona" />
 
-        <div className="mb-14 max-w-2xl">
+        <ScrollReveal className="mb-14 max-w-2xl">
           <SectionTitle
             id="como-funciona-titulo"
             overline="Como funciona"
@@ -35,9 +36,11 @@ export function ArchitectureSection() {
             área, as outras são avisadas e dão o próximo passo: um pedido criado
             reserva o estoque, e um pagamento aprovado libera a separação
           </p>
-        </div>
+        </ScrollReveal>
 
-        <ArchitectureDiagram />
+        <ScrollReveal delayMs={120}>
+          <ArchitectureDiagram />
+        </ScrollReveal>
       </div>
     </section>
   );

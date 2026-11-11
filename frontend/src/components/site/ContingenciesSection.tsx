@@ -9,6 +9,7 @@ import {
 import meshAbstract from "../../assets/mesh-abstract.webp";
 import { ORDER_STATUS, type OrderStatus } from "../../domain/orderStatus";
 import { StatusBadge } from "../ui/StatusBadge";
+import { ScrollReveal } from "./ScrollReveal";
 import { SectionMarker } from "./SectionMarker";
 import { SectionTitle } from "./SectionTitle";
 
@@ -91,91 +92,100 @@ export function ContingenciesSection() {
         <div className="lg:sticky lg:top-28">
           <SectionMarker sectionId="imprevistos" />
 
-          <SectionTitle
-            id="imprevistos-titulo"
-            overline="Quando algo sai do previsto"
-            lines={["Imprevistos acontecem.", "O pedido sabe o caminho."]}
-          />
+          <ScrollReveal>
+            <SectionTitle
+              id="imprevistos-titulo"
+              overline="Quando algo sai do previsto"
+              lines={["Imprevistos acontecem.", "O pedido sabe o caminho."]}
+            />
 
-          <p className="mt-4 max-w-md text-lg text-fg-muted">
-            Falta de estoque, cartão recusado, PIX que vence, cancelamento
-            depois do pagamento: cada situação tem uma regra definida. O pedido
-            muda de situação, o motivo fica registrado e o cliente é avisado.
-          </p>
+            <p className="mt-4 max-w-md text-lg text-fg-muted">
+              Falta de estoque, cartão recusado, PIX que vence, cancelamento
+              depois do pagamento: cada situação tem uma regra definida. O
+              pedido muda de situação, o motivo fica registrado e o cliente é
+              avisado.
+            </p>
 
-          <ul className="mt-6 flex flex-wrap gap-2 font-mono text-2xs text-fg-muted">
-            <li className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised/60 px-3 py-1">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full bg-accent"
-              />
-              motivo sempre registrado
-            </li>
+            <ul className="mt-6 flex flex-wrap gap-2 font-mono text-2xs text-fg-muted">
+              <li className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised/60 px-3 py-1">
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full bg-accent"
+                />
+                motivo sempre registrado
+              </li>
 
-            <li className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised/60 px-3 py-1">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full bg-warning"
-              />
-              cliente avisado por e-mail
-            </li>
-          </ul>
+              <li className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised/60 px-3 py-1">
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full bg-warning"
+                />
+                cliente avisado por e-mail
+              </li>
+            </ul>
 
-          <div className="crosshair mt-10">
-            <div className="overflow-hidden rounded-card border border-line">
-              <img
-                src={meshAbstract}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                className="aspect-3/2 w-full object-cover"
-              />
+            <div className="crosshair mt-10">
+              <div className="overflow-hidden rounded-card border border-line">
+                <img
+                  src={meshAbstract}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-3/2 w-full object-cover"
+                />
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Contingency cards. */}
         <ul className="space-y-4">
           {contingencies.map(
-            ({ icon: Icon, title, trigger, description, from, outcome }) => (
-              <li
-                key={title}
-                className="flex flex-col gap-4 rounded-card border border-line bg-surface/80 p-6 backdrop-blur-sm transition duration-300 hover:border-accent/40 hover:bg-surface sm:flex-row sm:gap-5"
-              >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-control bg-accent/10 text-accent">
-                  <Icon className="size-5" />
-                </span>
-
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold text-fg">{title}</h3>
-
-                    <span className="font-mono text-2xs text-accent">
-                      quando {trigger}
+            (
+              { icon: Icon, title, trigger, description, from, outcome },
+              index,
+            ) => (
+              <li key={title}>
+                <ScrollReveal delayMs={index * 100}>
+                  <div className="flex flex-col gap-4 rounded-card border border-line bg-surface/80 p-6 backdrop-blur-sm transition duration-300 hover:border-accent/40 hover:bg-surface sm:flex-row sm:gap-5">
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-control bg-accent/10 text-accent">
+                      <Icon className="size-5" />
                     </span>
+
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 className="text-lg font-semibold text-fg">
+                          {title}
+                        </h3>
+
+                        <span className="font-mono text-2xs text-accent">
+                          quando {trigger}
+                        </span>
+                      </div>
+
+                      <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                        {description}
+                      </p>
+
+                      <p className="mt-4 flex flex-wrap items-center gap-2">
+                        <StatusBadge tone={ORDER_STATUS[from].tone}>
+                          {ORDER_STATUS[from].label}
+                        </StatusBadge>
+
+                        <ArrowRight className="size-3.5 text-fg-muted" />
+                        <span className="sr-only">passa para</span>
+
+                        <StatusBadge tone={cancelled.tone}>
+                          {cancelled.label}
+                        </StatusBadge>
+
+                        <span className="font-mono text-2xs text-fg-muted">
+                          {outcome}
+                        </span>
+                      </p>
+                    </div>
                   </div>
-
-                  <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-                    {description}
-                  </p>
-
-                  <p className="mt-4 flex flex-wrap items-center gap-2">
-                    <StatusBadge tone={ORDER_STATUS[from].tone}>
-                      {ORDER_STATUS[from].label}
-                    </StatusBadge>
-
-                    <ArrowRight className="size-3.5 text-fg-muted" />
-                    <span className="sr-only">passa para</span>
-
-                    <StatusBadge tone={cancelled.tone}>
-                      {cancelled.label}
-                    </StatusBadge>
-
-                    <span className="font-mono text-2xs text-fg-muted">
-                      {outcome}
-                    </span>
-                  </p>
-                </div>
+                </ScrollReveal>
               </li>
             ),
           )}

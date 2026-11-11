@@ -1,4 +1,5 @@
 import { OperationPanelPreview } from "./OperationPanelPreview";
+import { ScrollReveal } from "./ScrollReveal";
 import { SectionMarker } from "./SectionMarker";
 import { SectionTitle } from "./SectionTitle";
 
@@ -12,7 +13,7 @@ export function OperationOverviewSection() {
       <div className="page-container">
         <SectionMarker sectionId="visao-da-operacao" />
 
-        <div className="mb-14 max-w-2xl">
+        <ScrollReveal className="mb-14 max-w-2xl">
           <SectionTitle
             id="visao-da-operacao-titulo"
             overline="Visão da operação"
@@ -25,9 +26,11 @@ export function OperationOverviewSection() {
             pagamento, quanto foi faturado e o ticket médio. Cada pedido tem sua
             linha do tempo, e o que precisa de atenção aparece em destaque.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <OperationPanelPreview />
+        <ScrollReveal delayMs={120}>
+          <OperationPanelPreview />
+        </ScrollReveal>
       </div>
     </section>
   );

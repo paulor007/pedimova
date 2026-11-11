@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import tracingVisual from "../../assets/tracing-visual.webp";
 import { cn } from "../../lib/cn";
+import { ScrollReveal } from "./ScrollReveal";
 import { SectionMarker } from "./SectionMarker";
 import { SectionTitle } from "./SectionTitle";
 
@@ -86,18 +87,19 @@ export function BenefitsSection() {
         <SectionMarker sectionId="beneficios" />
 
         {/* Section heading */}
-        <div className="mb-14 max-w-2xl">
+
+        <ScrollReveal className="mb-14 max-w-2xl">
           <SectionTitle
             id="beneficios-titulo"
             overline="Benefícios"
             lines={["Do pedido à entrega,", "sem nada se perder."]}
           />
-        </div>
+        </ScrollReveal>
 
         {/* Responsive benefits grid */}
         <div className="grid gap-5 lg:grid-cols-3">
           {/* Order timeline illustration */}
-          <div className="crosshair lg:row-span-2">
+          <ScrollReveal className="crosshair lg:row-span-2">
             <figure className="relative h-full min-h-64 overflow-hidden rounded-card border border-line">
               <img
                 src={tracingVisual}
@@ -122,32 +124,34 @@ export function BenefitsSection() {
                 </span>
               </figcaption>
             </figure>
-          </div>
+          </ScrollReveal>
 
           {/* Business benefit cards */}
-          {benefits.map(({ icon: Icon, title, description, tags, wide }) => (
-            <div
-              key={title}
-              className={cn(
-                "flex flex-col rounded-card border border-line bg-surface/80 p-6 backdrop-blur-sm transition duration-300 hover:border-accent/40 motion-safe:hover:-translate-y-1",
-                wide && "lg:col-span-2",
-              )}
-            >
-              <div className="mb-4 flex size-11 items-center justify-center rounded-control bg-accent/10 text-accent">
-                <Icon className="size-5" aria-hidden="true" />
-              </div>
+          {benefits.map(
+            ({ icon: Icon, title, description, tags, wide }, index) => (
+              <ScrollReveal
+                key={title}
+                delayMs={index * 100}
+                className={cn("h-full", wide && "lg:col-span-2")}
+              >
+                <div className="flex h-full flex-col rounded-card border border-line bg-surface/80 p-6 backdrop-blur-sm transition duration-300 hover:border-accent/40 motion-safe:hover:-translate-y-1">
+                  <div className="mb-4 flex size-11 items-center justify-center rounded-control bg-accent/10 text-accent">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </div>
 
-              <h3 className="text-lg font-semibold text-fg">{title}</h3>
+                  <h3 className="text-lg font-semibold text-fg">{title}</h3>
 
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">
-                {description}
-              </p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">
+                    {description}
+                  </p>
 
-              <p className="mt-4 border-t border-line pt-3 font-mono text-2xs text-accent">
-                {tags}
-              </p>
-            </div>
-          ))}
+                  <p className="mt-4 border-t border-line pt-3 font-mono text-2xs text-accent">
+                    {tags}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ),
+          )}
         </div>
       </div>
     </section>
