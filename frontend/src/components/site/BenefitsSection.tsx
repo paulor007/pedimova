@@ -27,7 +27,7 @@ const benefits: Benefit[] = [
     icon: Boxes,
     title: "Estoque sempre em dia",
     description:
-      "Os itens ficam reservados assim que o pedido é criado, voltam ao saldo se ele for cancelado e só saem do estoque no envio. Você não vende o que não tem.",
+      "Os itens são reservados na criação do pedido quando há saldo disponível para todos. Se o pedido for cancelado, a reserva é liberada; a baixa do estoque acontece no envio.",
     tags: "reserva · liberação · baixa no envio",
     wide: true,
   },
@@ -36,15 +36,15 @@ const benefits: Benefit[] = [
     icon: CreditCard,
     title: "Pagamento sob controle",
     description:
-      "PIX com prazo de validade ou cartão com resposta na hora. O pedido só segue para a separação depois do pagamento aprovado.",
+      "Na operação planejada, o PIX terá prazo de pagamento, e o cartão registrará aprovação ou recusa. O pedido seguirá para separação somente após a confirmação do pagamento.",
     tags: "PIX · cartão · prazo de validade",
   },
   {
     // RF24, RF25
     icon: MailCheck,
-    title: "Cliente sempre avisado",
+    title: "Avisos aos clientes",
     description:
-      "O cliente recebe um e-mail quando o pedido é pago, enviado, entregue ou cancelado, e cada envio fica registrado no pedido.",
+      "A plataforma prevê avisos por e-mail quando o pedido for pago, enviado, entregue ou cancelado, com registro de cada envio.",
     tags: "pago · enviado · entregue · cancelado",
   },
   {
@@ -52,15 +52,15 @@ const benefits: Benefit[] = [
     icon: ChartColumn,
     title: "Números da operação",
     description:
-      "Pedidos criados, aguardando pagamento, faturamento, ticket médio e produtos abaixo do mínimo, calculados a partir dos pedidos registrados.",
+      "O painel reunirá pedidos criados, pagamentos pendentes, faturamento, ticket médio (valor médio dos pedidos pagos) e produtos com estoque abaixo do mínimo.",
     tags: "faturamento · ticket médio · estoque mínimo",
   },
   {
     // RF16, RF22, RN10, RN11, RN15, RN16
     icon: ShieldCheck,
-    title: "Nenhum pedido pela metade",
+    title: "Cancelamentos com regras claras",
     description:
-      "Cartão recusado, PIX vencido ou cancelamento antes do envio: a reserva volta ao estoque, o pagamento já feito é estornado e o motivo fica registrado no pedido. Ninguém precisa desfazer nada à mão.",
+      "Cartão recusado, PIX vencido ou cancelamento antes do envio: cada situação segue regras para liberar reservas, registrar o motivo e, quando necessário, estornar pagamentos.",
     tags: "cancelamento com motivo · estorno · liberação da reserva",
     wide: true,
   },

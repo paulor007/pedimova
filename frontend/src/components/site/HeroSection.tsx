@@ -42,9 +42,10 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-7 max-w-xl text-base leading-8 text-fg-muted sm:text-lg">
-            Acompanhe cada pedido da criação à entrega. Organize estoque,
-            pagamentos e avisos aos clientes em um só lugar, com mais clareza e
-            controle sobre cada etapa da operação.
+            A Pedimova foi criada para reunir pedidos, estoque, pagamentos e
+            avisos aos clientes em um só lugar. Seu propósito é simplificar o
+            acompanhamento de cada pedido, da criação à entrega, e oferecer mais
+            clareza, organização e controle em todas as etapas da operação.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">

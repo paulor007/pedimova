@@ -31,10 +31,10 @@ export function ArchitectureSection() {
           />
 
           <p className="mt-4 text-lg text-fg-muted">
-            Pedidos, estoque, pagamentos, avisos aos clientes e cadastros
-            trabalham conectados, em um só lugar. Quando algo acontece em uma
-            área, as outras são avisadas e dão o próximo passo: um pedido criado
-            reserva o estoque, e um pagamento aprovado libera a separação
+            Pedidos, estoque, pagamentos, avisos aos clientes e cadastros fazem
+            parte da mesma operação. Ao criar um pedido, os itens são reservados
+            no estoque. Depois da aprovação do pagamento, o pedido segue para
+            separação. Assim, cada área sabe quando deve agir.
           </p>
         </ScrollReveal>
 

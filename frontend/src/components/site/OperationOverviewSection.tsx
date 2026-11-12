@@ -21,10 +21,11 @@ export function OperationOverviewSection() {
           />
 
           <p className="mt-4 text-lg text-fg-muted">
-            O painel mostra os números do período, calculados a partir dos
-            pedidos registrados: quantos pedidos entraram, quantos aguardam
-            pagamento, quanto foi faturado e o ticket médio. Cada pedido tem sua
-            linha do tempo, e o que precisa de atenção aparece em destaque.
+            O painel da Pedimova reúne, em uma única visão, os principais
+            indicadores da operação: pedidos criados, pagamentos pendentes,
+            faturamento e ticket médio (valor médio dos pedidos pagos). O
+            histórico de cada pedido e os alertas ajudam a identificar o que
+            exige atenção. Os dados da demonstração abaixo são ilustrativos.
           </p>
         </ScrollReveal>
 

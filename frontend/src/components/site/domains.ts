@@ -90,7 +90,8 @@ export const DOMAINS: readonly Domain[] = [
     focus: "produtos · clientes",
     audience: "atendimento e gestão",
     description:
-      "Reúne produtos, categorias e clientes. Quem já tem pedidos é desativado em vez de excluído, e o histórico fica preservado.",
+      "Reúne produtos, categorias e clientes. Clientes vinculados a pedidos são desativados, em vez de excluídos, para preservar o histórico.",
+
     publishes: "ProductUpdated",
   },
 ];

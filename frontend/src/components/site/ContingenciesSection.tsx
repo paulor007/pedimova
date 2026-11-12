@@ -54,7 +54,8 @@ const contingencies: Contingency[] = [
     title: "PIX vencido",
     trigger: "a cobrança não é paga no prazo",
     description:
-      "A cobrança PIX tem prazo de validade. Quando ele termina sem pagamento, a cobrança expira, o pedido é cancelado e os itens voltam ao estoque.",
+      "Se a cobrança PIX não for paga até o vencimento, ela expira, o pedido é cancelado e os itens reservados voltam ao estoque.",
+
     from: "AWAITING_PAYMENT",
     outcome: "cobrança expirada · reserva liberada",
   },
