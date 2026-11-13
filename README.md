@@ -6,7 +6,7 @@
 
 <p align="center">Gestão de pedidos, estoque e pagamentos em uma só plataforma.</p>
 
-> **Em desenvolvimento.** A página de apresentação está na etapa final de implementação (etapa 3 de 14). O painel de operação e o backend vêm nas próximas etapas.
+> **Estado atual:** A página de apresentação está na etapa final de implementação (etapa 3 de 14). O painel de operação e o backend vêm nas próximas etapas.
 
 ## O que é
 
@@ -45,7 +45,7 @@ O objetivo técnico é demonstrar boas práticas de desenvolvimento de software,
 | ----------------------------------------------------- | ------------ |
 | 1. Ambiente e estrutura do projeto                    | Concluída    |
 | 2. Identidade visual e design system                  | Concluída    |
-| 3. Página de apresentação                             | Em andamento |
+| 3. Página de apresentação                             | Concluída |
 | 4. Navegação, rotas e layout do painel                | Planejada    |
 | 5. Componentes reutilizáveis                          | Planejada    |
 | 6. Tipos, dados de demonstração e serviços            | Planejada    |
