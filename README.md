@@ -6,7 +6,7 @@
 
 <p align="center">Gestão de pedidos, estoque e pagamentos em uma só plataforma.</p>
 
-> **Estado atual:** A página de apresentação está na etapa final de implementação (etapa 3 de 14). O painel de operação e o backend vêm nas próximas etapas.
+> **Estado atual:** A página pública de apresentação está concluída e validada (etapa 3 de 14). O acesso à plataforma, o painel operacional e o backend serão desenvolvidos nas próximas etapas. As prévias apresentadas utilizam dados ilustrativos.
 
 ## O que é
 
@@ -41,22 +41,22 @@ O objetivo técnico é demonstrar boas práticas de desenvolvimento de software,
 
 ### Situação do desenvolvimento
 
-| Etapa                                                 | Situação     |
-| ----------------------------------------------------- | ------------ |
-| 1. Ambiente e estrutura do projeto                    | Concluída    |
-| 2. Identidade visual e design system                  | Concluída    |
+| Etapa                                                 | Situação  |
+| ----------------------------------------------------- | --------- |
+| 1. Ambiente e estrutura do projeto                    | Concluída |
+| 2. Identidade visual e design system                  | Concluída |
 | 3. Página de apresentação                             | Concluída |
-| 4. Navegação, rotas e layout do painel                | Planejada    |
-| 5. Componentes reutilizáveis                          | Planejada    |
-| 6. Tipos, dados de demonstração e serviços            | Planejada    |
-| 7. Gestão de pedidos                                  | Planejada    |
-| 8. Clientes e produtos                                | Planejada    |
-| 9. Controle de estoque                                | Planejada    |
-| 10. Pagamentos                                        | Planejada    |
-| 11. Painel de indicadores                             | Planejada    |
-| 12. Eventos e mensageria                              | Planejada    |
-| 13. Monitoramento e observabilidade                   | Planejada    |
-| 14. Testes, acessibilidade, documentação e publicação | Planejada    |
+| 4. Navegação, rotas e layout do painel                | Planejada |
+| 5. Componentes reutilizáveis                          | Planejada |
+| 6. Tipos, dados de demonstração e serviços            | Planejada |
+| 7. Gestão de pedidos                                  | Planejada |
+| 8. Clientes e produtos                                | Planejada |
+| 9. Controle de estoque                                | Planejada |
+| 10. Pagamentos                                        | Planejada |
+| 11. Painel de indicadores                             | Planejada |
+| 12. Eventos e mensageria                              | Planejada |
+| 13. Monitoramento e observabilidade                   | Planejada |
+| 14. Testes, acessibilidade, documentação e publicação | Planejada |
 
 O desenvolvimento começou pelo frontend, com dados de demonstração.
 
