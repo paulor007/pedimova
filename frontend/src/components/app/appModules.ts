@@ -1,10 +1,12 @@
-import type { Permission } from "../../domain/permissions";
+import { can, type Permission } from "../../domain/permissions";
+import type { UserProfile } from "../../domain/userProfile";
 import type { AppModuleId } from "./appNavigation";
 
 export type AppModuleCapability = {
   /** Permission that grants the capability (permission matrix, RF02). */
   permission: Permission;
   label: string;
+  shortLabel: string;
 };
 
 export type AppModule = {
@@ -27,6 +29,7 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "dashboard:view",
         label: "Acompanhar os indicadores e o que precisa de atenção",
+        shortLabel: "ver",
       },
     ],
   },
@@ -38,19 +41,27 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "orders:view",
         label: "Consultar os pedidos e o histórico de cada um",
+        shortLabel: "ver",
       },
-      { permission: "orders:create", label: "Registrar novos pedidos" },
+      {
+        permission: "orders:create",
+        label: "Registrar novos pedidos",
+        shortLabel: "criar",
+      },
       {
         permission: "orders:fulfill",
         label: "Iniciar a separação, marcar o envio e confirmar a entrega",
+        shortLabel: "expedir",
       },
       {
         permission: "orders:cancel-unpaid",
         label: "Cancelar pedidos antes do pagamento, com motivo",
+        shortLabel: "cancelar antes do pagamento",
       },
       {
         permission: "orders:cancel-paid",
         label: "Cancelar pedidos já pagos, com estorno automático",
+        shortLabel: "cancelar pedidos pagos",
       },
     ],
   },
@@ -62,10 +73,12 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "customers:view",
         label: "Consultar clientes e o histórico de pedidos",
+        shortLabel: "ver",
       },
       {
         permission: "customers:manage",
         label: "Cadastrar, editar, ativar e desativar clientes",
+        shortLabel: "cadastrar e editar",
       },
     ],
   },
@@ -77,10 +90,12 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "products:view",
         label: "Consultar o catálogo de produtos",
+        shortLabel: "ver",
       },
       {
         permission: "products:manage",
         label: "Cadastrar, editar, ativar e desativar produtos",
+        shortLabel: "cadastrar e editar",
       },
     ],
   },
@@ -92,10 +107,12 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "inventory:view",
         label: "Consultar saldos e movimentações",
+        shortLabel: "ver",
       },
       {
         permission: "inventory:adjust",
         label: "Registrar ajustes de estoque, com motivo",
+        shortLabel: "ajustar",
       },
     ],
   },
@@ -107,7 +124,36 @@ export const APP_MODULES: Record<AppModuleId, AppModule> = {
       {
         permission: "payments:view",
         label: "Acompanhar cobranças, pagamentos e estornos",
+        shortLabel: "ver",
       },
     ],
   },
 };
+const accessList = new Intl.ListFormat("pt-BR", {
+  type: "conjunction",
+});
+
+export function describeModuleAccess(
+  profile: UserProfile,
+  moduleId: AppModuleId,
+): string {
+  const { capabilities } = APP_MODULES[moduleId];
+
+  const granted = capabilities.filter((capability) =>
+    can(profile, capability.permission),
+  );
+
+  if (granted.length === 0) {
+    return "Sem acesso";
+  }
+
+  if (capabilities.length > 1 && granted.length === capabilities.length) {
+    return "Tudo";
+  }
+
+  const summary = accessList.format(
+    granted.map((capability) => capability.shortLabel),
+  );
+
+  return summary.charAt(0).toUpperCase() + summary.slice(1);
+}
