@@ -6,7 +6,7 @@
 
 <p align="center">Gestão de pedidos, estoque e pagamentos em uma só plataforma.</p>
 
-> **Estado atual:** A página pública de apresentação está concluída e validada (etapa 3 de 14). O acesso à plataforma, o painel operacional e o backend serão desenvolvidos nas próximas etapas. As prévias apresentadas utilizam dados ilustrativos.
+> **Estado atual:** A página pública e a estrutura da área interna estão concluídas (etapa 4 de 14). Já é possível entrar com um dos quatro perfis de demonstração, navegar pelas áreas permitidas a cada perfil e sair. As telas de cada área, os dados e o backend serão desenvolvidos nas próximas etapas. As prévias apresentadas utilizam dados ilustrativos.
 
 ## O que é
 
@@ -46,7 +46,7 @@ O objetivo técnico é demonstrar boas práticas de desenvolvimento de software,
 | 1. Ambiente e estrutura do projeto                    | Concluída |
 | 2. Identidade visual e design system                  | Concluída |
 | 3. Página de apresentação                             | Concluída |
-| 4. Navegação, rotas e layout do painel                | Planejada |
+| 4. Navegação, rotas e layout do painel                | Concluída |
 | 5. Componentes reutilizáveis                          | Planejada |
 | 6. Tipos, dados de demonstração e serviços            | Planejada |
 | 7. Gestão de pedidos                                  | Planejada |
@@ -149,7 +149,22 @@ A apresentação pública é desenvolvida para computador, tablet e celular, com
 
 **Organização do domínio**
 
-As situações de pedidos e pagamentos são centralizadas em `src/domain`, permitindo reutilização e consistência na aplicação.
+As situações de pedidos e pagamentos, os perfis de acesso e a matriz de permissões são centralizados em `src/domain`, permitindo reutilização e consistência na aplicação.
+
+**Acesso de demonstração e permissões**
+
+O menu, as rotas e as telas consultam a mesma matriz de permissões. Um perfil não vê o que não pode usar, e um endereço digitado diretamente mostra a página de acesso negado.
+
+As rotas internas ficam sob `/app`. Antes de cada tela, as funções de carregamento do React Router verificam a sessão e a permissão; sem sessão, o visitante vai para a tela de acesso e, depois de entrar, volta ao endereço que tinha pedido.
+
+| Já funciona no frontend                                     | Depende do backend                                        |
+| ----------------------------------------------------------- | --------------------------------------------------------- |
+| Escolha de um dos quatro perfis na tela de acesso           | Login com usuário e senha pelo Keycloak                   |
+| Menu, rotas e acesso negado conforme o perfil               | Autorização validada no gateway e em cada serviço         |
+| Sessão de demonstração guardada no navegador, até sair      | Sessão com token, expiração por inatividade               |
+| Área interna com menu lateral, menu móvel e páginas de erro | Conteúdo real de pedidos, cadastros, estoque e pagamentos |
+
+A sessão de demonstração registra apenas o perfil escolhido. Ela não é um mecanismo de segurança, porque qualquer pessoa pode alterar o armazenamento do navegador. A proteção real dos dados será feita pelo backend; no frontend, o módulo `src/session` é o único ponto que será substituído pela autenticação definitiva.
 
 **Organização do desenvolvimento**
 
@@ -160,14 +175,16 @@ As alterações são implementadas progressivamente, verificadas com TypeScript,
 ```text
 frontend/src/
 ├── components/
+│   ├── app/      # Menu, barra superior e mensagens da área interna
 │   ├── brand/    # Identidade da plataforma
 │   ├── site/     # Seções da apresentação pública
 │   └── ui/       # Componentes visuais reutilizáveis
 ├── config/       # Configurações da marca
-├── domain/       # Conceitos e situações do negócio
-├── layouts/      # Estruturas compartilhadas de páginas
+├── domain/       # Conceitos do negócio: situações, perfis e permissões
+├── layouts/      # Estruturas da área pública e da área interna
 ├── lib/          # Utilitários e hooks
-└── pages/        # Páginas da aplicação
+├── pages/        # Páginas públicas e, em app/, as telas internas
+└── session/      # Sessão de demonstração e verificações das rotas
 ```
 
 ### Como executar
@@ -199,6 +216,8 @@ npm run dev
 A aplicação poderá ser acessada em:
 
 `http://localhost:5173`
+
+Para conhecer a área interna, use **Acessar Plataforma** e escolha um dos perfis.
 
 ### Scripts disponíveis
 
