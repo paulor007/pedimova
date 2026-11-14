@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { APP_NAVIGATION } from "../components/app/appNavigation";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
-import { StatusBadge, type StatusTone } from "../components/ui/StatusBadge";
+import { StatusBadge } from "../components/ui/StatusBadge";
 import { TextLink } from "../components/ui/TextLink";
 import { ExternalLink } from "../components/ui/ExternalLink";
 import { BRAND, pageTitle } from "../config/brand";
-import { APP_NAVIGATION } from "../components/app/appNavigation";
+import { ORDER_STATUS } from "../domain/orderStatus";
+import { PAYMENT_STATUS } from "../domain/paymentStatus";
 import { can } from "../domain/permissions";
 import { USER_PROFILE, USER_PROFILES } from "../domain/userProfile";
 
@@ -83,14 +85,10 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   currency: "BRL",
 });
 
-const orderStatuses: { label: string; tone: StatusTone }[] = [
-  { label: "Pendente", tone: "neutral" },
-  { label: "Aguardando pagamento", tone: "warning" },
-  { label: "Pago", tone: "success" },
-  { label: "Em separação", tone: "info" },
-  { label: "Enviado", tone: "info" },
-  { label: "Entregue", tone: "success" },
-  { label: "Cancelado", tone: "danger" },
+/** Status vocabularies shown as badges, straight from the domain. */
+const statusGroups = [
+  { title: "Pedido", statuses: Object.values(ORDER_STATUS) },
+  { title: "Pagamento", statuses: Object.values(PAYMENT_STATUS) },
 ];
 
 function ColorSection() {
@@ -221,13 +219,18 @@ function ComponentsSection() {
 
       <Card className="mt-6">
         <h3 className="text-lg font-semibold">Etiquetas de situação</h3>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {orderStatuses.map((status) => (
-            <li key={status.label}>
-              <StatusBadge tone={status.tone}>{status.label}</StatusBadge>
-            </li>
-          ))}
-        </ul>
+        {statusGroups.map((group) => (
+          <div key={group.title} className="mt-4">
+            <h4 className="text-sm text-fg-muted">{group.title}</h4>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {group.statuses.map((status) => (
+                <li key={status.label}>
+                  <StatusBadge tone={status.tone}>{status.label}</StatusBadge>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </Card>
 
       <Card className="mt-6">
