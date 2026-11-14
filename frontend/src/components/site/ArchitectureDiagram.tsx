@@ -346,7 +346,7 @@ export function ArchitectureDiagram() {
               : "Retomar animação do diagrama"
           }
           title={isRunning ? "Pausar animação" : "Retomar animação"}
-          className="ml-auto hidden motion-safe:lg:inline-flex size-9 items-center justify-center rounded-control border border-line text-fg-muted transition hover:border-accent/40 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="relative ml-auto hidden motion-safe:lg:inline-flex size-9 after:absolute after:-inset-1 items-center justify-center rounded-control border border-line text-fg-muted transition hover:border-accent/40 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {isRunning ? (
             <Pause className="size-4" aria-hidden="true" />

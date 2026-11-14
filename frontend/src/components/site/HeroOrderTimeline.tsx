@@ -128,7 +128,7 @@ export function HeroOrderTimeline({
                 : "Retomar animação da prévia"
             }
             title={isRunning ? "Pausar animação" : "Retomar animação"}
-            className="inline-flex size-8 items-center justify-center rounded-control border border-line text-fg-muted transition hover:border-accent/40 hover:text-accent motion-reduce:hidden"
+            className="relative inline-flex size-8 items-center justify-center rounded-control border border-line text-fg-muted transition after:absolute after:-inset-1.5 hover:border-accent/40 hover:text-accent motion-reduce:hidden"
           >
             {isRunning ? (
               <Pause className="size-3.5" />
