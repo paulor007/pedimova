@@ -28,5 +28,14 @@ export function buttonClasses(
   );
 }
 
+/** Shared look of text inputs, selects and text areas. */
+export function fieldControlClasses(invalid: boolean): string {
+  return cn(
+    "w-full rounded-control border bg-canvas px-3.5 text-sm text-fg transition-colors placeholder:text-fg-muted",
+    "hover:border-fg-muted disabled:cursor-not-allowed disabled:opacity-60",
+    invalid ? "border-danger" : "border-line-strong",
+  );
+}
+
 export const textLinkClasses =
   "text-accent underline underline-offset-4 hover:no-underline";
