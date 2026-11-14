@@ -1,10 +1,14 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router";
+
 import { BRAND } from "../../config/brand";
 import { USER_PROFILE } from "../../domain/userProfile";
 import type { DemoSession } from "../../session/demoSession";
+
 import { Logo } from "../brand/Logo";
+import { IconButton } from "../ui/IconButton";
+
 import { AppNavList } from "./AppNavList";
 import { DemoBadge } from "./DemoBadge";
 
@@ -52,16 +56,14 @@ export function AppMobileNav({ session }: { session: DemoSession }) {
 
   return (
     <>
-      <button
-        type="button"
+      <IconButton
+        icon={Menu}
+        label="Abrir menu"
         onClick={open}
-        aria-label="Abrir menu"
         aria-haspopup="dialog"
         aria-controls="menu-movel"
-        className="-ml-2 inline-flex size-11 shrink-0 items-center justify-center rounded-control text-fg transition-colors hover:bg-surface-raised lg:hidden"
-      >
-        <Menu aria-hidden="true" className="size-5" />
-      </button>
+        className="-ml-2 lg:hidden"
+      />
 
       <dialog
         ref={dialogRef}
@@ -86,14 +88,7 @@ export function AppMobileNav({ session }: { session: DemoSession }) {
               <Logo />
             </Link>
 
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Fechar menu"
-              className="inline-flex size-11 items-center justify-center rounded-control text-fg transition-colors hover:bg-surface-raised"
-            >
-              <X aria-hidden="true" className="size-5" />
-            </button>
+            <IconButton icon={X} label="Fechar menu" onClick={close} />
           </div>
 
           <nav

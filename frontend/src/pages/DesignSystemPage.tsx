@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { Pencil, Plus, Save, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { APP_NAVIGATION } from "../components/app/appNavigation";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
+import { ExternalLink } from "../components/ui/ExternalLink";
+import { IconButton } from "../components/ui/IconButton";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { TextLink } from "../components/ui/TextLink";
-import { ExternalLink } from "../components/ui/ExternalLink";
+
 import { BRAND, pageTitle } from "../config/brand";
 import { ORDER_STATUS } from "../domain/orderStatus";
 import { PAYMENT_STATUS } from "../domain/paymentStatus";
@@ -190,6 +194,42 @@ function TypographySection() {
   );
 }
 
+/** Simulates a two-second save to demonstrate the loading state. */
+function LoadingButtonDemo() {
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveCount, setSaveCount] = useState(0);
+
+  useEffect(() => {
+    if (!isSaving) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setIsSaving(false);
+    }, 2000);
+
+    return () => window.clearTimeout(timer);
+  }, [isSaving]);
+
+  function handleSave() {
+    setSaveCount((count) => count + 1);
+    setIsSaving(true);
+  }
+
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-4">
+      <Button loading={isSaving} loadingText="Salvando…" onClick={handleSave}>
+        <Save aria-hidden="true" className="size-4" />
+        Salvar cliente
+      </Button>
+
+      <p className="text-sm text-fg-muted" aria-live="polite">
+        Salvamentos registrados: {saveCount}
+      </p>
+    </div>
+  );
+}
+
 function ComponentsSection() {
   const [lastClicked, setLastClicked] = useState("nenhum");
 
@@ -199,22 +239,48 @@ function ComponentsSection() {
 
       <Card className="mt-4">
         <h3 className="text-lg font-semibold">Botões</h3>
+
         <div className="mt-4 flex flex-wrap gap-3">
           <Button onClick={() => setLastClicked("primário")}>Primário</Button>
+
           <Button
             variant="secondary"
             onClick={() => setLastClicked("secundário")}
           >
             Secundário
           </Button>
+
           <Button variant="danger" onClick={() => setLastClicked("perigo")}>
             Perigo
           </Button>
+
+          <Button variant="ghost" onClick={() => setLastClicked("discreto")}>
+            Discreto
+          </Button>
+
           <Button disabled>Desativado</Button>
         </div>
+
         <p className="mt-3 text-sm text-fg-muted" aria-live="polite">
           Último botão clicado: {lastClicked}
         </p>
+
+        <h4 className="mt-6 text-sm text-fg-muted">Com ícone</h4>
+
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <Button>
+            <Plus aria-hidden="true" className="size-4" />
+            Novo pedido
+          </Button>
+
+          <IconButton icon={Pencil} label="Editar cliente" />
+
+          <IconButton icon={Trash2} label="Remover item" tone="danger" />
+        </div>
+
+        <h4 className="mt-6 text-sm text-fg-muted">Carregando</h4>
+
+        <LoadingButtonDemo />
       </Card>
 
       <Card className="mt-6">
