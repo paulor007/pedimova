@@ -5,6 +5,9 @@ import { StatusBadge, type StatusTone } from "../components/ui/StatusBadge";
 import { TextLink } from "../components/ui/TextLink";
 import { ExternalLink } from "../components/ui/ExternalLink";
 import { BRAND, pageTitle } from "../config/brand";
+import { APP_NAVIGATION } from "../components/app/appNavigation";
+import { can } from "../domain/permissions";
+import { USER_PROFILE, USER_PROFILES } from "../domain/userProfile";
 
 const colorTokens = [
   { name: "canvas", className: "bg-canvas", use: "Fundo da página" },
@@ -316,6 +319,92 @@ function InteractionSection() {
   );
 }
 
+function AccessSection() {
+  const items = APP_NAVIGATION.flatMap((group) => group.items);
+
+  return (
+    <section className="mt-12">
+      <h2 className="text-xl font-semibold">Perfis e permissões</h2>
+      <p className="mt-1 text-sm text-fg-muted">
+        Itens do menu que cada perfil vê, calculados a partir da matriz de
+        permissões.
+      </p>
+
+      <Card className="mt-6 overflow-x-auto">
+        <table className="w-full min-w-xl text-left text-sm">
+          <caption className="sr-only">
+            Itens do menu visíveis para cada perfil de acesso
+          </caption>
+
+          <thead>
+            <tr className="border-b border-line">
+              <th scope="col" className="py-2 pr-4 font-semibold">
+                Item do menu
+              </th>
+              {USER_PROFILES.map((profile) => (
+                <th
+                  key={profile}
+                  scope="col"
+                  className="px-3 py-2 font-semibold"
+                >
+                  {USER_PROFILE[profile].label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {items.map((item) => (
+              <tr
+                key={item.to}
+                className="border-b border-line last:border-b-0"
+              >
+                <th scope="row" className="py-2 pr-4 font-medium">
+                  <span className="flex items-center gap-2">
+                    <item.icon
+                      aria-hidden="true"
+                      className="size-4 text-fg-muted"
+                    />
+                    {item.label}
+                  </span>
+                  <span className="font-mono text-xs font-normal text-fg-muted">
+                    {item.to}
+                  </span>
+                </th>
+                {USER_PROFILES.map((profile) => (
+                  <td key={profile} className="px-3 py-2">
+                    {can(profile, item.permission) ? (
+                      <StatusBadge tone="success">Vê</StatusBadge>
+                    ) : (
+                      <StatusBadge tone="neutral">Não vê</StatusBadge>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      <Card className="mt-6">
+        <h3 className="text-lg font-semibold">Responsabilidades</h3>
+        <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+          {USER_PROFILES.map((profile) => (
+            <div key={profile}>
+              <dt className="text-sm font-semibold">
+                {USER_PROFILE[profile].label}
+              </dt>
+              <dd className="mt-1 text-sm text-fg-muted">
+                {USER_PROFILE[profile].responsibility}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Card>
+    </section>
+  );
+}
+
 export function DesignSystemPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8">
@@ -337,6 +426,7 @@ export function DesignSystemPage() {
       <TypographySection />
       <ComponentsSection />
       <InteractionSection />
+      <AccessSection />
     </div>
   );
 }
