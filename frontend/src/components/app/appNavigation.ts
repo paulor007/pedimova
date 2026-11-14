@@ -10,7 +10,12 @@ import {
 import { can, type Permission } from "../../domain/permissions";
 import type { UserProfile } from "../../domain/userProfile";
 
+/** Business modules of the internal area. */
+export type AppModuleId =
+  "dashboard" | "orders" | "customers" | "products" | "inventory" | "payments";
+
 export type AppNavigationItem = {
+  id: AppModuleId;
   label: string;
   /** Absolute route of the screen. */
   to: string;
@@ -32,36 +37,42 @@ export const APP_NAVIGATION: readonly AppNavigationGroup[] = [
     label: "Operação",
     items: [
       {
+        id: "dashboard",
         label: "Painel",
         to: "/app",
         icon: LayoutDashboard,
         permission: "dashboard:view",
       },
       {
+        id: "orders",
         label: "Pedidos",
         to: "/app/pedidos",
         icon: ShoppingCart,
         permission: "orders:view",
       },
       {
+        id: "customers",
         label: "Clientes",
         to: "/app/clientes",
         icon: Users,
         permission: "customers:view",
       },
       {
+        id: "products",
         label: "Produtos",
         to: "/app/produtos",
         icon: Package,
         permission: "products:view",
       },
       {
+        id: "inventory",
         label: "Estoque",
         to: "/app/estoque",
         icon: Boxes,
         permission: "inventory:view",
       },
       {
+        id: "payments",
         label: "Pagamentos",
         to: "/app/pagamentos",
         icon: CreditCard,
@@ -70,6 +81,11 @@ export const APP_NAVIGATION: readonly AppNavigationGroup[] = [
     ],
   },
 ];
+
+/** The same menu items, looked up by module. */
+export const APP_NAVIGATION_ITEM = Object.fromEntries(
+  APP_NAVIGATION.flatMap((group) => group.items).map((item) => [item.id, item]),
+) as Record<AppModuleId, AppNavigationItem>;
 
 /** Menu a profile sees: items without permission and empty groups are left out. */
 export function navigationFor(

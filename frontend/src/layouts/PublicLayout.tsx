@@ -3,6 +3,7 @@ import { Logo } from "../components/brand/Logo";
 import { HeaderNav } from "../components/site/HeaderNav";
 import { MobileMenu } from "../components/site/MobileMenu";
 import { ButtonLink } from "../components/ui/ButtonLink";
+import { SkipLink } from "../components/ui/SkipLink";
 import { BRAND } from "../config/brand";
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -13,12 +14,7 @@ export function PublicLayout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <a
-        href="#conteudo"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-20 focus:rounded-control focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-on-accent"
-      >
-        Pular para o conteúdo
-      </a>
+      <SkipLink targetId="conteudo" />
 
       <header className="sticky top-0 z-10 border-b border-line bg-canvas">
         <div className="page-container flex h-16 items-center justify-between gap-2 sm:gap-4">
