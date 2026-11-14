@@ -1,12 +1,13 @@
 import { cn } from "../../lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
 export type ButtonSize = "md" | "lg";
 
 const buttonVariantClasses: Record<ButtonVariant, string> = {
   primary: "bg-accent text-on-accent hover:brightness-110",
   secondary: "border border-line-strong text-fg hover:bg-surface-raised",
   danger: "bg-danger text-on-accent hover:brightness-110",
+  ghost: "text-fg-muted hover:bg-surface-raised hover:text-fg",
 };
 
 const buttonSizeClasses: Record<ButtonSize, string> = {

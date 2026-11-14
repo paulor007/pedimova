@@ -3,8 +3,8 @@ import type { CSSProperties } from "react";
 import { describeModuleAccess } from "../app/appModules";
 import { APP_NAVIGATION } from "../app/appNavigation";
 import { PROFILE_APPEARANCE } from "../app/profileAppearance";
+import { Button } from "../ui/Button";
 import { StatusBadge } from "../ui/StatusBadge";
-import { buttonClasses } from "../ui/styles";
 import { USER_PROFILE, type UserProfile } from "../../domain/userProfile";
 import { cn } from "../../lib/cn";
 import { getDemoUserName } from "../../session/demoSession";
@@ -98,16 +98,18 @@ export function ProfileCard({
       </dl>
 
       <div className="mt-auto pt-6">
-        <button
+        <Button
           type="submit"
           name="profile"
           value={profile}
-          disabled={isEntering}
-          className={cn(buttonClasses("primary"), "w-full")}
+          disabled={isEntering && !isChosen}
+          loading={isChosen}
+          loadingText="Entrando…"
+          className="w-full"
         >
           <LogIn aria-hidden="true" className="size-4" />
-          {isChosen ? "Entrando…" : `Entrar como ${label}`}
-        </button>
+          Entrar como {label}
+        </Button>
       </div>
     </article>
   );
