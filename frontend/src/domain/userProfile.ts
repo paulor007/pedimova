@@ -29,3 +29,8 @@ export const USER_PROFILE: Record<
 
 /** Profile codes in display order. */
 export const USER_PROFILES = Object.keys(USER_PROFILE) as UserProfile[];
+
+/** Tells whether a value is one of the profile codes, such as a form field. */
+export function isUserProfile(value: unknown): value is UserProfile {
+  return typeof value === "string" && Object.hasOwn(USER_PROFILE, value);
+}
