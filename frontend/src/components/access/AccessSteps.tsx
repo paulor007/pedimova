@@ -1,4 +1,5 @@
-import { Info } from "lucide-react";
+import { Info, Pause, Play } from "lucide-react";
+import { useState } from "react";
 
 const STEPS = [
   {
@@ -16,17 +17,36 @@ const STEPS = [
 ];
 
 export function AccessSteps() {
+  const [paused, setPaused] = useState(false);
+
   return (
     <aside
       aria-labelledby="como-entrar"
+      data-motion={paused ? "paused" : "running"}
       className="crosshair rounded-card border border-line bg-surface/80 p-6 backdrop-blur-sm"
     >
-      <h2
-        id="como-entrar"
-        className="font-mono text-2xs tracking-overline text-fg-muted uppercase"
-      >
-        Como funciona o acesso
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2
+          id="como-entrar"
+          className="font-mono text-2xs tracking-overline text-fg-muted uppercase"
+        >
+          Como funciona o acesso
+        </h2>
+
+        <button
+          type="button"
+          onClick={() => setPaused((current) => !current)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-control px-2 text-xs text-fg-muted transition-colors hover:text-fg motion-reduce:hidden"
+        >
+          {paused ? (
+            <Play aria-hidden="true" className="size-4" />
+          ) : (
+            <Pause aria-hidden="true" className="size-4" />
+          )}
+
+          {paused ? "Retomar movimento" : "Pausar movimento"}
+        </button>
+      </div>
 
       <ol className="mt-5 grid gap-5">
         {STEPS.map((step, index) => (
@@ -34,7 +54,7 @@ export function AccessSteps() {
             {index < STEPS.length - 1 && (
               <span
                 aria-hidden="true"
-                className="access-step-connector pointer-events-none absolute top-9 bottom-[-1.25rem] left-[0.9375rem] w-px"
+                className="step-connector pointer-events-none absolute top-9 bottom-[-1.25rem] left-[0.9375rem] w-px motion-safe:animate-step-flow"
               />
             )}
 

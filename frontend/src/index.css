@@ -75,6 +75,9 @@
   --animate-rise: rise 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
   --animate-drawer-in: drawer-in 0.2s cubic-bezier(0.23, 1, 0.32, 1);
 
+  /* Continuous connector animation, controlled by the access steps */
+  --animate-step-flow: step-flow 1.2s linear infinite;
+
   @keyframes flow-dash {
     to {
       stroke-dashoffset: -12;
@@ -108,6 +111,12 @@
     from {
       opacity: 0;
       transform: translateY(14px);
+    }
+  }
+
+  @keyframes step-flow {
+    to {
+      background-position-y: 12px;
     }
   }
 
@@ -179,6 +188,16 @@
     );
 
   background-size: 56px 56px;
+}
+
+/* Dashed vertical connector between the demo access steps */
+@utility step-connector {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-line-strong) 0 4px,
+    transparent 4px 12px
+  );
+  background-size: 1px 12px;
 }
 
 /* Soft glow in the color of the element's domain (set through --domain) */
@@ -273,7 +292,9 @@
       scroll-behavior: auto !important;
     }
   }
-} /* Animated connector between the demo access steps */
+}
+
+/* Animated connector between the demo access steps */
 .access-step-connector {
   background-image: repeating-linear-gradient(
     to bottom,
