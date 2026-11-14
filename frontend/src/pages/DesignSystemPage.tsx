@@ -15,6 +15,8 @@ import { PAYMENT_STATUS } from "../domain/paymentStatus";
 import { can } from "../domain/permissions";
 import { USER_PROFILE, USER_PROFILES } from "../domain/userProfile";
 
+import { FormFieldsSection } from "./design-system/FormFieldsSection";
+
 const colorTokens = [
   { name: "canvas", className: "bg-canvas", use: "Fundo da página" },
   { name: "surface", className: "bg-surface", use: "Cartões e painéis" },
@@ -494,6 +496,7 @@ export function DesignSystemPage() {
       <ColorSection />
       <TypographySection />
       <ComponentsSection />
+      <FormFieldsSection />
       <InteractionSection />
       <AccessSection />
     </div>
