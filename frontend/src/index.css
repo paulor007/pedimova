@@ -273,4 +273,19 @@
       scroll-behavior: auto !important;
     }
   }
+} /* Animated connector between the demo access steps */
+.access-step-connector {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-line-strong) 0 4px,
+    transparent 4px 12px
+  );
+  background-size: 1px 12px;
+  animation: access-step-flow 1.2s linear infinite;
+}
+
+@keyframes access-step-flow {
+  to {
+    background-position-y: 12px;
+  }
 }

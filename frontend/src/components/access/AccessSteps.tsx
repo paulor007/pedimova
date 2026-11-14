@@ -34,7 +34,7 @@ export function AccessSteps() {
             {index < STEPS.length - 1 && (
               <span
                 aria-hidden="true"
-                className="absolute top-9 bottom-[-1.25rem] left-[0.9375rem] border-l border-dashed border-line-strong"
+                className="access-step-connector pointer-events-none absolute top-9 bottom-[-1.25rem] left-[0.9375rem] w-px"
               />
             )}
 
