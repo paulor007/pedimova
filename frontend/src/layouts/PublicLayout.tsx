@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { Link, Outlet, ScrollRestoration, useMatch } from "react-router";
 import { Logo } from "../components/brand/Logo";
 import { HeaderNav } from "../components/site/HeaderNav";
@@ -32,6 +33,7 @@ export function PublicLayout() {
               variant="secondary"
               className="shrink-0 whitespace-nowrap"
             >
+              <ArrowLeft aria-hidden="true" className="size-4" />
               Voltar ao início
             </ButtonLink>
           ) : isHomePage ? (
