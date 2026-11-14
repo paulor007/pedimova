@@ -17,6 +17,8 @@ import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import {
   APP_ROUTE_ID,
+  accessAction,
+  accessLoader,
   appLoader,
   logoutAction,
   requirePermission,
@@ -51,7 +53,12 @@ export const router = createBrowserRouter([
     HydrateFallback: renderNothing,
     children: [
       { index: true, Component: HomePage },
-      { path: "entrar", Component: AccessPage },
+      {
+        path: "entrar",
+        Component: AccessPage,
+        loader: accessLoader,
+        action: accessAction,
+      },
       ...developmentRoutes,
       { path: "*", Component: NotFoundPage },
     ],
