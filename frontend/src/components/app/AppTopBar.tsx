@@ -3,6 +3,7 @@ import { Form } from "react-router";
 import { USER_PROFILE } from "../../domain/userProfile";
 import type { DemoSession } from "../../session/demoSession";
 import { Button } from "../ui/Button";
+import { AppMobileNav } from "./AppMobileNav";
 import { DemoBadge } from "./DemoBadge";
 
 type AppTopBarProps = {
@@ -15,6 +16,8 @@ export function AppTopBar({ title, session }: AppTopBarProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-canvas">
       <div className="page-container flex h-16 items-center gap-3">
+        <AppMobileNav session={session} />
+
         <h1 className="min-w-0 truncate text-base font-semibold sm:text-lg">
           {title}
         </h1>
