@@ -54,12 +54,12 @@ export function DashboardPage() {
           {profile.label}
         </p>
 
-        <h1
+        <h2
           id="painel-boas-vindas"
           className="mt-3 text-2xl font-semibold tracking-tight text-fg"
         >
           Olá, {firstName}.
-        </h1>
+        </h2>
 
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-fg-muted">
           {profile.responsibility}
