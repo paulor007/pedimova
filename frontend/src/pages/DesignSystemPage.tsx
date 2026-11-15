@@ -15,6 +15,7 @@ import { PAYMENT_STATUS } from "../domain/paymentStatus";
 import { can } from "../domain/permissions";
 import { USER_PROFILE, USER_PROFILES } from "../domain/userProfile";
 
+import { FormattedFieldsSection } from "./design-system/FormattedFieldsSection";
 import { FormFieldsSection } from "./design-system/FormFieldsSection";
 
 const colorTokens = [
@@ -497,6 +498,7 @@ export function DesignSystemPage() {
       <TypographySection />
       <ComponentsSection />
       <FormFieldsSection />
+      <FormattedFieldsSection />
       <InteractionSection />
       <AccessSection />
     </div>
