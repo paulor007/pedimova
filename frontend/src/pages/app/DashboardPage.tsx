@@ -37,19 +37,19 @@ export function DashboardPage() {
         style={{ "--domain": profileColor } as CSSProperties}
         className="relative isolate overflow-hidden rounded-card border border-line bg-surface p-6 sm:p-8"
       >
-        {/* Grade tecnológica de fundo */}
+        {/* Background grid */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 bg-section-grid opacity-50"
         />
 
-        {/* Iluminação suave na cor do perfil */}
+        {/* Soft glow in the profile color */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-32 right-0 -z-10 size-64 rounded-full bg-(--domain)/10 blur-3xl"
         />
 
-        {/* Conteúdo de boas-vindas */}
+        {/* Greeting */}
         <p className="font-mono text-2xs tracking-overline text-(--domain) uppercase">
           {profile.label}
         </p>
