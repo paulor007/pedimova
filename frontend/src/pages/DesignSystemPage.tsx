@@ -7,6 +7,7 @@ import { Card } from "../components/ui/Card";
 import { ExternalLink } from "../components/ui/ExternalLink";
 import { IconButton } from "../components/ui/IconButton";
 import { StatusBadge } from "../components/ui/StatusBadge";
+import { useToast } from "../components/ui/toast/useToast";
 import { TextLink } from "../components/ui/TextLink";
 
 import { BRAND, pageTitle } from "../config/brand";
@@ -15,6 +16,7 @@ import { PAYMENT_STATUS } from "../domain/paymentStatus";
 import { can } from "../domain/permissions";
 import { USER_PROFILE, USER_PROFILES } from "../domain/userProfile";
 
+import { FeedbackSection } from "./design-system/FeedbackSection";
 import { FormattedFieldsSection } from "./design-system/FormattedFieldsSection";
 import { FormFieldsSection } from "./design-system/FormFieldsSection";
 
@@ -197,8 +199,10 @@ function TypographySection() {
   );
 }
 
-/** Simulates a two-second save to demonstrate the loading state. */
+/** Simulates a two-second save and confirms it with a quick message. */
 function LoadingButtonDemo() {
+  const toast = useToast();
+
   const [isSaving, setIsSaving] = useState(false);
   const [saveCount, setSaveCount] = useState(0);
 
@@ -209,10 +213,11 @@ function LoadingButtonDemo() {
 
     const timer = window.setTimeout(() => {
       setIsSaving(false);
+      toast.success("Cliente salvo.");
     }, 2000);
 
     return () => window.clearTimeout(timer);
-  }, [isSaving]);
+  }, [isSaving, toast]);
 
   function handleSave() {
     setSaveCount((count) => count + 1);
@@ -499,6 +504,7 @@ export function DesignSystemPage() {
       <ComponentsSection />
       <FormFieldsSection />
       <FormattedFieldsSection />
+      <FeedbackSection />
       <InteractionSection />
       <AccessSection />
     </div>
