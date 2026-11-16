@@ -37,7 +37,7 @@ export function FormField({
     [error && errorId, hint && hintId].filter(Boolean).join(" ") || undefined;
 
   return (
-    <div className="grid gap-1.5">
+    <div>
       <label htmlFor={id} className="text-sm font-medium text-fg">
         {label}
         {required && (
@@ -47,25 +47,33 @@ export function FormField({
         )}
       </label>
 
-      {children({
-        id,
-        "aria-describedby": describedBy,
-        "aria-invalid": error ? true : undefined,
-        "aria-required": required || undefined,
-      })}
+      <div className="mt-1.5">
+        {children({
+          id,
+          "aria-describedby": describedBy,
+          "aria-invalid": error ? true : undefined,
+          "aria-required": required || undefined,
+        })}
+      </div>
 
-      {error && (
-        <p
-          id={errorId}
-          className="flex items-start gap-1.5 text-xs text-danger"
-        >
-          <CircleAlert aria-hidden="true" className="mt-px size-3.5 shrink-0" />
-          {error}
-        </p>
-      )}
+      {/* Always present, so an error that appears is read aloud */}
+      <div aria-live="polite">
+        {error && (
+          <p
+            id={errorId}
+            className="mt-1.5 flex items-start gap-1.5 text-xs text-danger"
+          >
+            <CircleAlert
+              aria-hidden="true"
+              className="mt-px size-3.5 shrink-0"
+            />
+            {error}
+          </p>
+        )}
+      </div>
 
       {hint && (
-        <p id={hintId} className="text-xs text-fg-muted">
+        <p id={hintId} className="mt-1.5 text-xs text-fg-muted">
           {hint}
         </p>
       )}
