@@ -1,11 +1,16 @@
 import { Save } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useState, type FocusEvent, type FormEvent } from "react";
 
 import { Button } from "../../components/ui/Button";
 import { Card } from "../../components/ui/Card";
+import {
+  isLeavingForFormButton,
+  type FieldElement,
+} from "../../components/ui/fieldBlur";
 import { SelectField } from "../../components/ui/SelectField";
 import { TextAreaField } from "../../components/ui/TextAreaField";
 import { TextField } from "../../components/ui/TextField";
+import { useToast } from "../../components/ui/toast/useToast";
 
 type CustomerDraft = {
   name: string;
@@ -15,6 +20,7 @@ type CustomerDraft = {
 };
 
 type DraftErrors = Partial<Record<keyof CustomerDraft, string>>;
+type TouchedFields = Partial<Record<keyof CustomerDraft, boolean>>;
 
 const EMPTY_DRAFT: CustomerDraft = {
   name: "",
@@ -53,21 +59,39 @@ function validateDraft(draft: CustomerDraft): DraftErrors {
   return errors;
 }
 
-/** Example form: a simplified customer, validated when saving. */
+/** Example form validated on blur and on submit. */
 export function FormFieldsSection() {
+  const toast = useToast();
+
   const [draft, setDraft] = useState<CustomerDraft>(EMPTY_DRAFT);
+  const [touched, setTouched] = useState<TouchedFields>({});
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [savedName, setSavedName] = useState<string | null>(null);
 
   // Errors are derived from the current draft.
-  const errors = wasSubmitted ? validateDraft(draft) : {};
+  const errors = validateDraft(draft);
+
+  /** Shows errors after blur or a save attempt. */
+  function visibleError(field: keyof CustomerDraft) {
+    return wasSubmitted || touched[field] ? errors[field] : undefined;
+  }
+
+  function markTouched(
+    field: keyof CustomerDraft,
+    event: FocusEvent<FieldElement>,
+  ) {
+    // O botão decide se valida ou limpa o formulário.
+    if (isLeavingForFormButton(event)) {
+      return;
+    }
+
+    setTouched((current) => ({ ...current, [field]: true }));
+  }
 
   function update<K extends keyof CustomerDraft>(
     field: K,
     value: CustomerDraft[K],
   ) {
     setDraft((current) => ({ ...current, [field]: value }));
-    setSavedName(null);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -89,15 +113,14 @@ export function FormFieldsSection() {
       return;
     }
 
-    setSavedName(draft.name.trim());
-    setDraft(EMPTY_DRAFT);
-    setWasSubmitted(false);
+    toast.success(`Cliente ${draft.name.trim()} pronto para salvar.`);
+    handleClear();
   }
 
   function handleClear() {
     setDraft(EMPTY_DRAFT);
+    setTouched({});
     setWasSubmitted(false);
-    setSavedName(null);
   }
 
   return (
@@ -105,8 +128,8 @@ export function FormFieldsSection() {
       <h2 className="text-xl font-semibold">Campos de formulário</h2>
 
       <p className="mt-1 text-sm text-fg-muted">
-        Cadastro de exemplo: os erros aparecem ao salvar e somem enquanto você
-        corrige.
+        Cadastro de exemplo: os erros aparecem ao sair do campo ou ao salvar, e
+        somem enquanto você corrige.
       </p>
 
       <Card className="mt-6 max-w-2xl">
@@ -122,7 +145,8 @@ export function FormFieldsSection() {
             autoComplete="name"
             value={draft.name}
             onChange={(event) => update("name", event.target.value)}
-            error={errors.name}
+            onBlur={(event) => markTouched("name", event)}
+            error={visibleError("name")}
           />
 
           <TextField
@@ -133,8 +157,9 @@ export function FormFieldsSection() {
             autoComplete="email"
             value={draft.email}
             onChange={(event) => update("email", event.target.value)}
+            onBlur={(event) => markTouched("email", event)}
             hint="Usado para avisar o cliente sobre cada pedido."
-            error={errors.email}
+            error={visibleError("email")}
           />
 
           <SelectField
@@ -147,7 +172,8 @@ export function FormFieldsSection() {
             onChange={(event) =>
               update("type", event.target.value as CustomerDraft["type"])
             }
-            error={errors.type}
+            onBlur={(event) => markTouched("type", event)}
+            error={visibleError("type")}
           />
 
           <TextAreaField
@@ -156,8 +182,9 @@ export function FormFieldsSection() {
             maxLength={NOTES_MAX}
             value={draft.notes}
             onChange={(event) => update("notes", event.target.value)}
+            onBlur={(event) => markTouched("notes", event)}
             hint={`${draft.notes.length} de ${NOTES_MAX} caracteres`}
-            error={errors.notes}
+            error={visibleError("notes")}
           />
 
           <TextField
@@ -178,10 +205,6 @@ export function FormFieldsSection() {
               Limpar
             </Button>
           </div>
-
-          <p aria-live="polite" className="text-sm text-success">
-            {savedName && `Cliente ${savedName} pronto para salvar.`}
-          </p>
         </form>
       </Card>
     </section>
